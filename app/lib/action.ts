@@ -2,8 +2,6 @@
 
 import { signIn } from "@/auth";
 import { signInSchema, signUpSchema } from "@/lib/zod";
-// import { redirect } from "next/navigation";
-
 export async function signInAuth(
   data: SignInError,
   formData: FormData
@@ -12,16 +10,16 @@ export async function signInAuth(
     email: formData.get("email"),
     password: formData.get("password"),
   });
-  if (result.success) {
+  if (result?.success) {
     await signIn("credentials", {
       email: formData.get("email"),
       password: formData.get("password"),
       redirectTo: "/",
     });
     return { success: true };
+  } else {
+    return { success: false, error: result?.error?.flatten().fieldErrors };
   }
-
-  return { success: false, error: result?.error?.flatten().fieldErrors };
 }
 
 export async function signUp(
@@ -55,12 +53,10 @@ export async function signUp(
           console.log("signup response::", res);
           return res.json();
         })
-        .then((user) => {
-          return user;
-        })
         .catch((error) => {
           return error;
         });
+
       return { success: true };
     } catch (error) {
       console.log(error);

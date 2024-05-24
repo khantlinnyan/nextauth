@@ -2,7 +2,6 @@
 import { signUp } from "@/app/lib/action";
 import CustomInput from "@/components/ui/CustomInput";
 import FormBtn, { LinkBtn } from "@/components/ui/FormBtn";
-import Link from "next/link";
 import { useFormState } from "react-dom";
 
 type Props = {};

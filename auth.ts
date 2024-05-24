@@ -25,8 +25,8 @@ export const { handlers, auth, signIn } = NextAuth({
                 password,
               }),
             }
-          );
-          console.log(user);
+          ).then((res) => res.json());
+
           return { success: true };
         } catch (error) {
           console.log(error);
@@ -35,27 +35,4 @@ export const { handlers, auth, signIn } = NextAuth({
     }),
   ],
   session: { strategy: "jwt" },
-
-  // callbacks: {
-  //   async jwt({ token, user, session, trigger }) {
-  //     if (user) {
-  //       const u = user as unknown as any;
-  //       return {
-  //         ...token,
-  //         id: u.id,
-  //       };
-  //     }
-  //     return token;
-  //   },
-  //   async session({ session, token }) {
-  //     return {
-  //       ...session,
-  //       user: {
-  //         ...session.user,
-  //         _id: token.id,
-  //         name: token.name,
-  //       },
-  //     };
-  //   },
-  // },
 });

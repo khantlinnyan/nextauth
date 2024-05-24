@@ -1,7 +1,7 @@
 import React from "react";
 
 type Props = {
-  error: string[];
+  error: [] | undefined;
 };
 
 const FormError = ({ error }: Props) => {
